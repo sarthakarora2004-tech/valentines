@@ -2,30 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>For You</title>
+  <title>For Arshia</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Animated Background -->
-  <div class="background"></div>
-
-  <!-- Page 1 -->
-  <div class="card" id="page1">
+<!-- PAGE 1 -->
+<div class="page active bg1" id="p1">
+  <div class="card">
     <h1 class="fade">Heyy sweetie</h1>
-    <p class="fade delay1">I have a very important question ❤️</p>
-    <button onclick="nextPage(2)">Continue</button>
+    <p class="fade delay1">I have something important to ask you ❤️</p>
+    <button onclick="go(2)">Continue</button>
   </div>
+</div>
 
-  <!-- Page 2 -->
-  <div class="card hidden" id="page2">
+<!-- PAGE 2 -->
+<div class="page bg2" id="p2">
+  <div class="card">
     <p class="fade">Okay… don’t panic</p>
     <p class="fade delay1">Just answer honestly</p>
-    <button onclick="nextPage(3)">I’m ready</button>
+    <button onclick="go(3)">I’m ready</button>
   </div>
+</div>
 
-  <!-- Page 3 -->
-  <div class="card hidden" id="page3">
+<!-- PAGE 3 -->
+<div class="page bg3" id="p3">
+  <div class="card">
     <h1 class="fade">Arshia</h1>
     <h2 class="fade delay1">Will you be my Valentine? 🥰</h2>
 
@@ -38,14 +40,18 @@
       Acha ms. chilly, gussa chorh do… maan jao na 🥺
     </p>
   </div>
+</div>
 
-  <!-- YES Page -->
-  <div class="card hidden" id="yesPage">
+<!-- YES PAGE -->
+<div class="page bg4" id="p4">
+  <canvas id="confetti"></canvas>
+  <div class="card">
     <h1 class="fade">Yayyy 🥹❤️</h1>
     <p class="fade delay1">Thank you for choosing me</p>
-    <p class="fade delay2">I promise to make it up to you 🌸</p>
+    <p class="fade delay2">I promise to make it special 🌸</p>
   </div>
+</div>
 
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
