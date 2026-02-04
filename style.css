@@ -73,3 +73,25 @@ button {
   inset: 0;
   pointer-events: none;
 }
+/* Floating outline shapes */
+.bg-shapes {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.shape {
+  fill: none;
+  stroke: rgba(255, 120, 160, 0.35);
+  stroke-width: 1.5;
+  animation: rise 20s linear infinite;
+}
+
+.s1 { animation-duration: 22s; }
+.s2 { animation-duration: 26s; stroke: rgba(180, 160, 255, 0.35); }
+.s3 { animation-duration: 24s; stroke: rgba(255, 200, 120, 0.35); }
+
+@keyframes rise {
+  from { transform: translateY(0); }
+  to { transform: translateY(-140vh); }
+}
