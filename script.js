@@ -1,90 +1,57 @@
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  overflow: hidden;
+function go(n) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById("p" + n).classList.add("active");
+  if (n === 4) confettiPop();
 }
 
-.page {
-  min-height: 100vh;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
+const no = document.getElementById("no");
+const yes = document.getElementById("yes");
+const text = document.getElementById("chilly");
 
-.page.active {
-  display: flex;
-}
+no.addEventListener("mouseover", () => {
+  text.classList.remove("hidden");
+  no.style.position = "absolute";
+  no.style.left = Math.random() * 70 + "%";
+  no.style.top = Math.random() * 70 + "%";
+});
 
-/* Pastel bases */
-.bg1 { background: #fff0f5; }
-.bg2 { background: #fff7e6; }
-.bg3 { background: #f3e8ff; }
-.bg4 { background: #eafff1; }
+yes.addEventListener("click", () => go(4));
 
-/* LIVE FLOATING BACKGROUND */
-.floating::before,
-.floating::after {
-  content: "💖 🍫 🧸 🌈 💕";
-  position: absolute;
-  font-size: 40px;
-  opacity: 0.15;
-  animation: float 18s linear infinite;
-}
+function confettiPop() {
+  const canvas = document.getElementById("confetti");
+  const ctx = canvas.getContext("2d");
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
 
-.floating::after {
-  animation-duration: 25s;
-  font-size: 50px;
-}
+  const pieces = [];
+  const colors = ["#ff4d6d", "#ffd166", "#cdb4db", "#bde0fe"];
 
-@keyframes float {
-  from { transform: translateY(100vh); }
-  to { transform: translateY(-120vh); }
-}
+  for (let i = 0; i < 400; i++) {
+    pieces.push({
+      x: canvas.width / 2,
+      y: canvas.height / 2,
+      dx: (Math.random() - 0.5) * 12,
+      dy: (Math.random() - 0.8) * 12,
+      size: Math.random() * 6 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)]
+    });
+  }
 
-/* Card */
-.card {
-  background: rgba(255,255,255,0.95);
-  padding: 40px 25px;
-  border-radius: 25px;
-  text-align: center;
-  max-width: 420px;
-  z-index: 2;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-}
+  function animate() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p => {
+      ctx.fillStyle = p.color;
+      ctx.fillRect(p.x, p.y, p.size, p.size);
+      p.x += p.dx;
+      p.y += p.dy;
+      p.dy += 0.15;
 
-/* Text animation */
-.fade {
-  opacity: 0;
-  animation: fadeUp 1s forwards;
-}
-
-.delay1 { animation-delay: .4s; }
-.delay2 { animation-delay: .8s; }
-
-@keyframes fadeUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-/* Buttons */
-button {
-  margin-top: 20px;
-  padding: 12px 26px;
-  border-radius: 25px;
-  border: none;
-  background: #ff8fab;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.hidden { display: none; }
-.small { font-size: 14px; }
-
-#confetti {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
+      if (p.y > canvas.height) {
+        p.y = -10;
+        p.x = Math.random() * canvas.width;
+      }
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
 }
