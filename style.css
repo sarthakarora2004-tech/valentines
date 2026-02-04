@@ -1,12 +1,29 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: #fff0f3;
+  background: url("https://images.unsplash.com/photo-1519681393784-d120267933ba") no-repeat center center fixed;
+  background-size: cover;
   text-align: center;
 }
 
 .container {
   padding: 40px 20px;
+  animation: fadeSlide 1.2s ease;
+  background: rgba(255, 255, 255, 0.75);
+  margin: 40px auto;
+  border-radius: 20px;
+  max-width: 420px;
+}
+
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hidden {
@@ -35,7 +52,7 @@ button {
 }
 
 button:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
 }
 
 .buttons {
