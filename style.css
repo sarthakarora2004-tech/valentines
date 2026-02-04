@@ -1,0 +1,75 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+/* LIVE BACKGROUND */
+#bg {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    270deg,
+    #ffe4ec,
+    #fff1da,
+    #f3e8ff,
+    #eafff1
+  );
+  background-size: 800% 800%;
+  animation: moveBG 15s ease infinite;
+  z-index: -1;
+}
+
+@keyframes moveBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Pages */
+.page {
+  display: none;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.page.show {
+  display: flex;
+}
+
+/* Card */
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* Buttons */
+button {
+  margin: 10px;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 20px;
+  background: #ff6f91;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
+}
+
+/* Confetti */
+#confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
