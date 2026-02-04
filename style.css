@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
 }
 
 /* Page logic */
@@ -10,13 +11,33 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: hidden;
 }
 
 .page.active {
   display: flex;
 }
 
-/* Animated pastel backgrounds */
+/* LIVE BACKGROUND using floating shapes */
+.page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255,182,193,.25) 0 80px, transparent 90px),
+    radial-gradient(circle at 80% 40%, rgba(255,218,185,.25) 0 90px, transparent 100px),
+    radial-gradient(circle at 50% 80%, rgba(221,214,255,.25) 0 70px, transparent 80px);
+  animation: floatBg 18s linear infinite;
+  z-index: 0;
+}
+
+@keyframes floatBg {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-40px); }
+  100% { transform: translateY(0); }
+}
+
+/* Base gradients */
 .bg1 { background: linear-gradient(120deg, #ffe4ec, #fff6f8); }
 .bg2 { background: linear-gradient(120deg, #fff1da, #fff8ed); }
 .bg3 { background: linear-gradient(120deg, #f6e9ff, #fdf4ff); }
@@ -24,12 +45,12 @@ body {
 
 /* Card */
 .card {
-  background: rgba(255,255,255,0.92);
+  background: rgba(255,255,255,0.93);
   padding: 40px 25px;
   border-radius: 22px;
   max-width: 420px;
   text-align: center;
-  box-shadow: 0 15px 45px rgba(0,0,0,0.08);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
   z-index: 2;
 }
 
@@ -47,9 +68,7 @@ body {
   to { transform: translateY(0); opacity: 1; }
 }
 
-.hidden {
-  display: none;
-}
+.hidden { display: none; }
 
 /* Buttons */
 button {
@@ -61,16 +80,6 @@ button {
   color: white;
   font-size: 16px;
   cursor: pointer;
-}
-
-.buttons {
-  margin-top: 25px;
-}
-
-.small-text {
-  font-size: 14px;
-  margin-top: 15px;
-  color: #555;
 }
 
 /* Confetti canvas */
