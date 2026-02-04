@@ -1,65 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Arshia will you be my valentine 💖</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<title>Arshia will you be my Valentine</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Confetti library -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<!-- Confetti -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  <link rel="stylesheet" href="style.css" />
+<style>
+* {
+  box-sizing: border-box;
+  font-family: "Poppins", system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(120deg, #ffe0ec, #e9e7ff);
+}
+
+/* LIVE BACKGROUND */
+.bg {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,170,200,.35), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(200,200,255,.35), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(255,220,180,.35), transparent 40%);
+  animation: bgMove 10s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+@keyframes bgMove {
+  from { transform: scale(1); }
+  to   { transform: scale(1.1); }
+}
+
+/* FLOATING VALENTINE OUTLINES */
+.shape {
+  position: fixed;
+  bottom: -60px;
+  font-size: 28px;
+  opacity: 0.4;
+  animation: floatUp linear infinite;
+  z-index: 1;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-120vh); }
+}
+
+/* PAGES */
+.page {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 20px;
+  z-index: 2;
+}
+
+.page.show {
+  display: flex;
+}
+
+h1 {
+  font-size: 2.1rem;
+  color: #333;
+}
+
+p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+button {
+  margin: 12px;
+  padding: 12px 26px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.yes {
+  background: #ff6f9f;
+  color: white;
+}
+
+.no {
+  background: #eee;
+}
+
+#msg {
+  margin-top: 16px;
+  color: #ff4d88;
+  font-weight: 600;
+}
+</style>
 </head>
+
 <body>
 
-  <!-- LIVE FLOATING BACKGROUND SHAPES -->
-  <svg class="bg-shapes" viewBox="0 0 100 100" preserveAspectRatio="none">
-    <defs>
-      <symbol id="heart" viewBox="0 0 32 29">
-        <path d="M23.6,0c-3.4,0-6.4,2.2-7.6,5.4
-        C14.8,2.2,11.8,0,8.4,0
-        C3.8,0,0,3.8,0,8.4
-        c0,9.4,16,20.6,16,20.6
-        s16-11.2,16-20.6
-        C32,3.8,28.2,0,23.6,0z"/>
-      </symbol>
-    </defs>
+<div class="bg"></div>
 
-    <use href="#heart" x="10" y="100" class="shape s1"/>
-    <use href="#heart" x="40" y="120" class="shape s2"/>
-    <use href="#heart" x="70" y="110" class="shape s3"/>
-  </svg>
+<!-- Floating shapes -->
+<div class="shape" style="left:10%; animation-duration:18s;">♡</div>
+<div class="shape" style="left:30%; animation-duration:22s;">◯</div>
+<div class="shape" style="left:55%; animation-duration:20s;">♡</div>
+<div class="shape" style="left:75%; animation-duration:24s;">◯</div>
 
-  <!-- PAGE 1 -->
-  <div class="page active" id="page1">
-    <h1>Heyy sweetie 💕</h1>
-    <p>Thoda sa cute sa question hai…</p>
-    <button onclick="nextPage(2)">Next 💌</button>
-  </div>
+<!-- PAGE 1 -->
+<div class="page show" id="p1">
+  <h1>Heyy sweetie 💕</h1>
+  <p>Thoda sa cute sa question hai…</p>
+  <button onclick="go(2)">Next 💌</button>
+</div>
 
-  <!-- PAGE 2 -->
-  <div class="page" id="page2">
-    <h1>Just answer honestly</h1>
-    <p>Promise no pressure 🫶</p>
-    <button onclick="nextPage(3)">Okay 😌</button>
-  </div>
+<!-- PAGE 2 -->
+<div class="page" id="p2">
+  <h1>Just answer honestly</h1>
+  <p>Promise no pressure</p>
+  <button onclick="go(3)">Okay 😌</button>
+</div>
 
-  <!-- PAGE 3 -->
-  <div class="page" id="page3">
-    <h1>Arshia, will you be my Valentine? 🥰</h1>
+<!-- PAGE 3 -->
+<div class="page" id="p3">
+  <h1>Arshia, will you be my Valentine? 🥰</h1>
 
-    <div class="buttons">
-      <button class="yes" onclick="celebrate()">Yes 🥰</button>
-      <button id="noBtn" class="no"
-        onmouseover="dodgeNo()"
-        onclick="dodgeNo()">No 😤</button>
-    </div>
+  <button class="yes" onclick="celebrate()">Yes 🥰</button>
+  <button class="no" id="noBtn"
+    onclick="dodge()"
+    onmouseover="dodge()">No 😤</button>
 
-    <p id="msg" class="hide">
-      acha ms. chilly gussa chorh do maan jao 💗
-    </p>
-  </div>
+  <p id="msg" style="display:none;">
+    acha ms. chilly gussa chorh do maan jao 💗
+  </p>
+</div>
 
-  <script src="script.js"></script>
+<script>
+let current = 1;
+let confettiDone = false;
+
+function go(n) {
+  document.getElementById("p" + current).classList.remove("show");
+  document.getElementById("p" + n).classList.add("show");
+  current = n;
+}
+
+function dodge() {
+  const b = document.getElementById("noBtn");
+  b.style.position = "absolute";
+  b.style.left = Math.random() * 70 + "%";
+  b.style.top = Math.random() * 70 + "%";
+  document.getElementById("msg").style.display = "block";
+}
+
+function celebrate() {
+  if (confettiDone) return;
+  confettiDone = true;
+
+  const end = Date.now() + 1800;
+  (function frame() {
+    confetti({
+      particleCount: 10,
+      spread: 80,
+      origin: { y: 0.6 }
+    });
+    if (Date.now() < end) requestAnimationFrame(frame);
+  })();
+}
+</script>
+
 </body>
 </html>
