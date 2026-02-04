@@ -1,58 +1,56 @@
-body { border: 10px solid red; }
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
-/* Page logic */
 .page {
   min-height: 100vh;
   display: none;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   position: relative;
-  overflow: hidden;
 }
 
 .page.active {
   display: flex;
 }
 
-/* LIVE BACKGROUND using floating shapes */
-.page::before {
-  content: "";
+/* Pastel bases */
+.bg1 { background: #fff0f5; }
+.bg2 { background: #fff7e6; }
+.bg3 { background: #f3e8ff; }
+.bg4 { background: #eafff1; }
+
+/* LIVE FLOATING BACKGROUND */
+.floating::before,
+.floating::after {
+  content: "💖 🍫 🧸 🌈 💕";
   position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle at 20% 30%, rgba(255,182,193,.25) 0 80px, transparent 90px),
-    radial-gradient(circle at 80% 40%, rgba(255,218,185,.25) 0 90px, transparent 100px),
-    radial-gradient(circle at 50% 80%, rgba(221,214,255,.25) 0 70px, transparent 80px);
-  animation: floatBg 18s linear infinite;
-  z-index: 0;
+  font-size: 40px;
+  opacity: 0.15;
+  animation: float 18s linear infinite;
 }
 
-@keyframes floatBg {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-40px); }
-  100% { transform: translateY(0); }
+.floating::after {
+  animation-duration: 25s;
+  font-size: 50px;
 }
 
-/* Base gradients */
-.bg1 { background: linear-gradient(120deg, #ffe4ec, #fff6f8); }
-.bg2 { background: linear-gradient(120deg, #fff1da, #fff8ed); }
-.bg3 { background: linear-gradient(120deg, #f6e9ff, #fdf4ff); }
-.bg4 { background: linear-gradient(120deg, #eafff1, #f4fff8); }
+@keyframes float {
+  from { transform: translateY(100vh); }
+  to { transform: translateY(-120vh); }
+}
 
 /* Card */
 .card {
-  background: rgba(255,255,255,0.93);
+  background: rgba(255,255,255,0.95);
   padding: 40px 25px;
-  border-radius: 22px;
-  max-width: 420px;
+  border-radius: 25px;
   text-align: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+  max-width: 420px;
   z-index: 2;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
 }
 
 /* Text animation */
@@ -69,8 +67,6 @@ body {
   to { transform: translateY(0); opacity: 1; }
 }
 
-.hidden { display: none; }
-
 /* Buttons */
 button {
   margin-top: 20px;
@@ -83,7 +79,9 @@ button {
   cursor: pointer;
 }
 
-/* Confetti canvas */
+.hidden { display: none; }
+.small { font-size: 14px; }
+
 #confetti {
   position: fixed;
   inset: 0;
