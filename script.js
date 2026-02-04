@@ -1,61 +1,90 @@
-function go(n) {
-  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
-  document.getElementById("p" + n).classList.add("active");
-
-  if (n === 4) launchConfetti();
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
 }
 
-const no = document.getElementById("no");
-const yes = document.getElementById("yes");
-const text = document.getElementById("chilly");
+.page {
+  min-height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
 
-no.addEventListener("mouseover", () => {
-  text.classList.remove("hidden");
-  no.style.position = "absolute";
-  no.style.left = Math.random() * 70 + "%";
-  no.style.top = Math.random() * 70 + "%";
-});
+.page.active {
+  display: flex;
+}
 
-yes.addEventListener("click", () => go(4));
+/* Pastel bases */
+.bg1 { background: #fff0f5; }
+.bg2 { background: #fff7e6; }
+.bg3 { background: #f3e8ff; }
+.bg4 { background: #eafff1; }
 
-/* CONTINUOUS CONFETTI */
-function launchConfetti() {
-  const canvas = document.getElementById("confetti");
-  const ctx = canvas.getContext("2d");
+/* LIVE FLOATING BACKGROUND */
+.floating::before,
+.floating::after {
+  content: "💖 🍫 🧸 🌈 💕";
+  position: absolute;
+  font-size: 40px;
+  opacity: 0.15;
+  animation: float 18s linear infinite;
+}
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+.floating::after {
+  animation-duration: 25s;
+  font-size: 50px;
+}
 
-  const colors = ["#ff8fab", "#ffd6e0", "#ffc2d1", "#cdb4db", "#bde0fe"];
-  const pieces = [];
+@keyframes float {
+  from { transform: translateY(100vh); }
+  to { transform: translateY(-120vh); }
+}
 
-  for (let i = 0; i < 250; i++) {
-    pieces.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      r: Math.random() * 6 + 4,
-      d: Math.random() * 2 + 1,
-      color: colors[Math.floor(Math.random() * colors.length)]
-    });
-  }
+/* Card */
+.card {
+  background: rgba(255,255,255,0.95);
+  padding: 40px 25px;
+  border-radius: 25px;
+  text-align: center;
+  max-width: 420px;
+  z-index: 2;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
 
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    pieces.forEach(p => {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = p.color;
-      ctx.fill();
+/* Text animation */
+.fade {
+  opacity: 0;
+  animation: fadeUp 1s forwards;
+}
 
-      p.y += p.d;
-      if (p.y > canvas.height) {
-        p.y = -10;
-        p.x = Math.random() * canvas.width;
-      }
-    });
+.delay1 { animation-delay: .4s; }
+.delay2 { animation-delay: .8s; }
 
-    requestAnimationFrame(draw);
-  }
+@keyframes fadeUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
 
-  draw();
+/* Buttons */
+button {
+  margin-top: 20px;
+  padding: 12px 26px;
+  border-radius: 25px;
+  border: none;
+  background: #ff8fab;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.hidden { display: none; }
+.small { font-size: 14px; }
+
+#confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
 }
