@@ -5,7 +5,6 @@
 <title>Arshia will you be my Valentine</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Confetti -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
@@ -18,39 +17,40 @@ body {
   margin: 0;
   height: 100vh;
   overflow: hidden;
-  background: linear-gradient(120deg, #ffe0ec, #e9e7ff);
+  background: linear-gradient(120deg, #ffe6f0, #efe9ff);
 }
 
-/* LIVE BACKGROUND */
+/* BACKGROUND GRADIENT MOVE */
 .bg {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(circle at 20% 20%, rgba(255,170,200,.35), transparent 40%),
+    radial-gradient(circle at 20% 20%, rgba(255,180,210,.35), transparent 40%),
     radial-gradient(circle at 80% 30%, rgba(200,200,255,.35), transparent 40%),
-    radial-gradient(circle at 50% 80%, rgba(255,220,180,.35), transparent 40%);
-  animation: bgMove 10s ease-in-out infinite alternate;
+    radial-gradient(circle at 50% 80%, rgba(255,230,180,.35), transparent 40%);
+  animation: bgMove 12s ease-in-out infinite alternate;
   z-index: 0;
 }
 
 @keyframes bgMove {
   from { transform: scale(1); }
-  to   { transform: scale(1.1); }
+  to { transform: scale(1.08); }
 }
 
-/* FLOATING VALENTINE OUTLINES */
-.shape {
+/* FLOATING CUTE ELEMENTS */
+.float {
   position: fixed;
   bottom: -60px;
-  font-size: 28px;
-  opacity: 0.4;
+  font-size: 26px;
+  opacity: 0.35;
   animation: floatUp linear infinite;
   z-index: 1;
+  pointer-events: none;
 }
 
 @keyframes floatUp {
   from { transform: translateY(0); }
-  to   { transform: translateY(-120vh); }
+  to { transform: translateY(-120vh); }
 }
 
 /* PAGES */
@@ -63,16 +63,20 @@ body {
   flex-direction: column;
   text-align: center;
   padding: 20px;
-  z-index: 2;
+  z-index: 5;
+  color: #333;
 }
 
 .page.show {
   display: flex;
 }
 
+/* TEXT STYLING */
 h1 {
-  font-size: 2.1rem;
-  color: #333;
+  font-size: 2.2rem;
+  background: linear-gradient(90deg, #ff6fae, #8f7cff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 p {
@@ -82,7 +86,7 @@ p {
 
 button {
   margin: 12px;
-  padding: 12px 26px;
+  padding: 12px 28px;
   font-size: 1rem;
   border: none;
   border-radius: 30px;
@@ -90,7 +94,7 @@ button {
 }
 
 .yes {
-  background: #ff6f9f;
+  background: #ff6fae;
   color: white;
 }
 
@@ -110,11 +114,12 @@ button {
 
 <div class="bg"></div>
 
-<!-- Floating shapes -->
-<div class="shape" style="left:10%; animation-duration:18s;">♡</div>
-<div class="shape" style="left:30%; animation-duration:22s;">◯</div>
-<div class="shape" style="left:55%; animation-duration:20s;">♡</div>
-<div class="shape" style="left:75%; animation-duration:24s;">◯</div>
+<!-- FLOATING SHAPES -->
+<div class="float" style="left:10%; animation-duration:22s;">🧸</div>
+<div class="float" style="left:25%; animation-duration:26s;">🍫</div>
+<div class="float" style="left:45%; animation-duration:24s;">♡</div>
+<div class="float" style="left:65%; animation-duration:28s;">🌈</div>
+<div class="float" style="left:80%; animation-duration:23s;">♡</div>
 
 <!-- PAGE 1 -->
 <div class="page show" id="p1">
@@ -134,7 +139,7 @@ button {
 <div class="page" id="p3">
   <h1>Arshia, will you be my Valentine? 🥰</h1>
 
-  <button class="yes" onclick="celebrate()">Yes 🥰</button>
+  <button class="yes" onclick="yes()">Yes 🥰</button>
   <button class="no" id="noBtn"
     onclick="dodge()"
     onmouseover="dodge()">No 😤</button>
@@ -142,6 +147,13 @@ button {
   <p id="msg" style="display:none;">
     acha ms. chilly gussa chorh do maan jao 💗
   </p>
+</div>
+
+<!-- PAGE 4 (HAPPY PAGE) -->
+<div class="page" id="p4">
+  <h1>I’m really really happy 🥹💖</h1>
+  <p>Thank you for saying yes.</p>
+  <p>You just made my day ✨</p>
 </div>
 
 <script>
@@ -162,19 +174,16 @@ function dodge() {
   document.getElementById("msg").style.display = "block";
 }
 
-function celebrate() {
-  if (confettiDone) return;
-  confettiDone = true;
-
-  const end = Date.now() + 1800;
-  (function frame() {
-    confetti({
-      particleCount: 10,
-      spread: 80,
-      origin: { y: 0.6 }
-    });
-    if (Date.now() < end) requestAnimationFrame(frame);
-  })();
+function yes() {
+  if (!confettiDone) {
+    confettiDone = true;
+    const end = Date.now() + 1800;
+    (function frame() {
+      confetti({ particleCount: 12, spread: 80, origin: { y: 0.6 } });
+      if (Date.now() < end) requestAnimationFrame(frame);
+    })();
+  }
+  go(4);
 }
 </script>
 
