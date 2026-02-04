@@ -2,30 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>For You ❤️</title>
+  <title>For You</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="container" id="page1">
-    <h1>Heyy sweetie</h1>
-    <p>I have a very important question ❤️</p>
-    <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" class="gif">
+  <!-- Animated Background -->
+  <div class="background"></div>
+
+  <!-- Page 1 -->
+  <div class="card" id="page1">
+    <h1 class="fade">Heyy sweetie</h1>
+    <p class="fade delay1">I have a very important question ❤️</p>
     <button onclick="nextPage(2)">Continue</button>
   </div>
 
-  <div class="container hidden" id="page2">
-    <p>Okay… don’t panic</p>
-    <p>Just answer honestly</p>
-    <img src="https://media.giphy.com/media/l2QDM9Jnim1YVILXa/giphy.gif" class="gif">
+  <!-- Page 2 -->
+  <div class="card hidden" id="page2">
+    <p class="fade">Okay… don’t panic</p>
+    <p class="fade delay1">Just answer honestly</p>
     <button onclick="nextPage(3)">I’m ready</button>
   </div>
 
-  <div class="container hidden" id="page3">
-    <h1>Arshia…</h1>
-    <h2>Will you be my Valentine? 🥰</h2>
-
-    <img src="https://media.giphy.com/media/26BRv0ThflsHCqDrG/giphy.gif" class="gif">
+  <!-- Page 3 -->
+  <div class="card hidden" id="page3">
+    <h1 class="fade">Arshia</h1>
+    <h2 class="fade delay1">Will you be my Valentine? 🥰</h2>
 
     <div class="buttons">
       <button id="yes">Yes 💕</button>
@@ -33,21 +35,15 @@
     </div>
 
     <p id="chilly" class="small-text hidden">
-      Acha ms chilly,gussa chorh do… maan jao na 🥺
+      Acha ms. chilly, gussa chorh do… maan jao na 🥺
     </p>
   </div>
 
-  <div class="container hidden" id="yesPage">
-    <h1>Yayyy 🥹❤️</h1>
-    <p>Thank you for choosing me</p>
-    <p>I promise to make it up to you 🌸</p>
-
-    <img src="https://media.giphy.com/media/5GoVLqeAOo6PK/giphy.gif"
-     style="position:fixed; bottom:20px; left:20px; width:80px; opacity:0.7;">
-
-<img src="https://media.giphy.com/media/26BRuo6sLetdllPAQ/giphy.gif"
-     style="position:fixed; top:20px; right:20px; width:80px; opacity:0.7;">
-    
+  <!-- YES Page -->
+  <div class="card hidden" id="yesPage">
+    <h1 class="fade">Yayyy 🥹❤️</h1>
+    <p class="fade delay1">Thank you for choosing me</p>
+    <p class="fade delay2">I promise to make it up to you 🌸</p>
   </div>
 
   <script src="script.js"></script>
