@@ -1,29 +1,50 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: url("https://images.unsplash.com/photo-1519681393784-d120267933ba") no-repeat center center fixed;
-  background-size: cover;
-  text-align: center;
+  background: #fff6f8;
+  overflow-x: hidden;
 }
 
-.container {
-  padding: 40px 20px;
-  animation: fadeSlide 1.2s ease;
-  background: rgba(255, 255, 255, 0.75);
-  margin: 40px auto;
-  border-radius: 20px;
+/* Soft animated background */
+.background {
+  position: fixed;
+  inset: 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='120' height='120' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='10' y='60' font-size='40' fill='rgba(255,182,193,0.25)'%3E🧸%3C/text%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg width='140' height='140' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='20' y='70' font-size='40' fill='rgba(255,160,122,0.25)'%3E🍫%3C/text%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg width='160' height='160' xmlns='http://www.w3.org/2000/svg'%3E%3Ctext x='30' y='90' font-size='40' fill='rgba(255,192,203,0.25)'%3E💗%3C/text%3E%3C/svg%3E");
+  animation: drift 60s linear infinite;
+  z-index: -1;
+}
+
+@keyframes drift {
+  from { background-position: 0 0, 0 0, 0 0; }
+  to   { background-position: 1000px 1000px, -800px 800px, 600px -600px; }
+}
+
+/* Card */
+.card {
   max-width: 420px;
+  margin: 80px auto;
+  background: rgba(255,255,255,0.9);
+  border-radius: 22px;
+  padding: 40px 25px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
 }
 
-@keyframes fadeSlide {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Animations */
+.fade {
+  animation: fadeUp 1s ease forwards;
+  opacity: 0;
+}
+
+.delay1 { animation-delay: .4s; }
+.delay2 { animation-delay: .8s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .hidden {
@@ -34,29 +55,23 @@ h1, h2, p {
   color: #333;
 }
 
-.gif {
-  width: 220px;
-  border-radius: 16px;
-  margin: 20px 0;
-}
-
 button {
-  padding: 12px 22px;
-  border: none;
+  margin-top: 20px;
+  padding: 12px 26px;
   border-radius: 25px;
-  font-size: 16px;
-  margin: 10px;
-  cursor: pointer;
+  border: none;
   background: #ff8fab;
   color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 button:hover {
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
 .buttons {
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 .small-text {
